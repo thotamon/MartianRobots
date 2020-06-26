@@ -4,6 +4,9 @@
     using System.ComponentModel;
     using System.Linq;
 
+    /// <summary>
+    /// Helper class for extraction enum description attribute value
+    /// </summary>
     public static class DescriptionHelper
     {
         public static string GetEnumDescription(Enum value)

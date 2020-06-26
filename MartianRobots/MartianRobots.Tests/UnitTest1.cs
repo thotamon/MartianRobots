@@ -1,5 +1,4 @@
 using MartianRobots.Core;
-using MartianRobots.Core.Mars;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,50 @@ namespace MartianRobots.Tests
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestMoveAndLost()
+        {
+            var log = new List<string>();
+            var inputController = new InputController(s => log.Add(s));
+
+            inputController.ProcessLine("4 4");
+            inputController.ProcessLine("0 0 W");
+            Assert.AreEqual(0, log.Count);
+
+            inputController.ProcessLine("F");
+            Assert.AreEqual("0 0 W LOST", log.Last());
+
+            log.Clear();
+            inputController.ProcessLine("0 0 N");
+            inputController.ProcessLine("FFFFF");
+            Assert.AreEqual(0, log.Count);
+        }
+
+        [TestMethod]
+        public void TestRoundMoveInPlace()
+        {
+            var log = new List<string>();
+            var inputController = new InputController(s => log.Add(s));
+
+            inputController.ProcessLine("4 4");
+            inputController.ProcessLine("0 0 W");
+            inputController.ProcessLine("LLLL");
+            Assert.AreEqual("0 0 W", log.Last());
+        }
+
+        [TestMethod]
+        public void TestPlaceRobotOutsideSurface()
+        {
+            var log = new List<string>();
+            var inputController = new InputController(s => log.Add(s));
+
+            inputController.ProcessLine("4 4");
+            inputController.ProcessLine("6 6 W");
+
+            Assert.AreEqual(0, log.Count);
+        }
+
+        [TestMethod]
+        public void TestSequenceWithLostRobots()
         {
             var log = new List<string>();
             var inputController = new InputController(s => log.Add(s));

@@ -3,6 +3,9 @@
     using MartianRobots.Core.Mars;
     using System;
 
+    /// <summary>
+    /// This action creates marthian surface as rectangle field of given size
+    /// </summary>
     public sealed class InitializeMarthianSurface : ISceneAction
     {
         private readonly int _width;

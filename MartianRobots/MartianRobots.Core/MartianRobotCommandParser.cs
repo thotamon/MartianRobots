@@ -1,33 +1,23 @@
-﻿using MartianRobots.Core.Actions;
-using MartianRobots.Core.Enums;
-using MartianRobots.Core.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace MartianRobots.Core
+﻿namespace MartianRobots.Core
 {
+    using MartianRobots.Core.Actions;
+    using MartianRobots.Core.Enums;
+    using MartianRobots.Core.Exceptions;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+
+    /// <summary>
+    /// Simple input text command parser.Translates text to sequence of actions.
+    /// </summary>
     public static class MartianRobotCommandParser
     {
-        private static Regex orientationChar = new Regex("[NSEW]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        private static Regex moveOrRoteateChar = new Regex("[LRF]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        private static Regex commandChar = new Regex("[NSEWLRF]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
-        private static Dictionary<char, RobotOrientation> oriantationIndex = new Dictionary<char, RobotOrientation>() 
-        { 
-          {'n', RobotOrientation.North }, 
-          {'s', RobotOrientation.South }, 
-          {'e', RobotOrientation.East },
-          {'w', RobotOrientation.West } 
-        };
-
         private enum TokenType
         {
             Empty = 0,
             CharCommand,
-            TextValue, 
+            TextValue,
             Num
         }
 
@@ -50,6 +40,17 @@ namespace MartianRobots.Core
                 this.TokenType = tokenType;
             }
         }
+
+        private static Regex orientationChar = new Regex("[NSEW]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static Regex moveOrRoteateChar = new Regex("[LRF]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static Regex commandChar = new Regex("[NSEWLRF]", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static Dictionary<char, RobotOrientation> oriantationIndex = new Dictionary<char, RobotOrientation>() 
+        { 
+          {'n', RobotOrientation.North }, 
+          {'s', RobotOrientation.South }, 
+          {'e', RobotOrientation.East },
+          {'w', RobotOrientation.West } 
+        };
 
         /// <summary>
         /// Assume context-free grammar

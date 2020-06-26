@@ -1,40 +1,26 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-
-namespace MartianRobots.Console
+﻿namespace MartianRobots.Console
 {
+    using System;
+    using MartianRobots.Core;
+
     class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
-            var builder = new HostBuilder()
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    config.AddJsonFile("appsettings.json", optional: true);
-                    config.AddEnvironmentVariables();
+            var inputController = new InputController(s => Console.WriteLine(s));
+            bool running = true;
+            Console.CancelKeyPress += (s, e) => { running = false; e.Cancel = true; };
 
-                    if (args != null)
-                    {
-                        config.AddCommandLine(args);
-                    }
-                })
-                .ConfigureServices((hostContext, services) =>
-                {
-                    services.AddOptions();
-                    services.Configure<AppConfig>(hostContext.Configuration.GetSection("AppConfig"));
+            while (running)
+            {
+                var command = Console.ReadLine();
+                inputController.ProcessLine(command);
+            }
+        }
 
-                    services.AddSingleton<IHostedService, MartianRobotsSupportService>();
-                })
-                .ConfigureLogging((hostingContext, logging) => {
-                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
-                    logging.AddConsole();
-                });
-
-            await builder.RunConsoleAsync();
+        private static void Console_CancelKeyPress(object sender, ConsoleCancelEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

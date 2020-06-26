@@ -1,15 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MartianRobots.Core.Mars
+﻿namespace MartianRobots.Core.Mars
 {
+    using System;
+    using System.Collections.Generic;
+
+    /// <summary>
+    /// Interface for reading scene data
+    /// </summary>
     public interface IScene
     {
         MartianSurface Surface { get; set; }
         MartianRobot Robot { get; set; }
     }
 
+    /// <summary>
+    /// Scene class encapsulates robot, marthian surface and operations over them
+    /// </summary>
     public sealed class Scene: IScene
     {
         private MartianRobot _currentRobot;

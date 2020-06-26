@@ -2,6 +2,9 @@
 {
     using System.ComponentModel;
 
+    /// <summary>
+    /// Robot direction 
+    /// </summary>
     public enum RobotDirection
     {
         [Description("L")]

@@ -1,10 +1,11 @@
-﻿using MartianRobots.Core.Mars;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MartianRobots.Core
+﻿namespace MartianRobots.Core
 {
+    using MartianRobots.Core.Mars;
+    using System;
+
+    /// <summary>
+    /// Simple controller to hide details of operation processing
+    /// </summary>
     public sealed class InputController
     {
         private enum State

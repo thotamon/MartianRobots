@@ -4,6 +4,9 @@
     using MartianRobots.Core.Mars;
     using System;
 
+    /// <summary>
+    /// Action represention robot move operation
+    /// </summary>
     public class MartianRobotMoveAction : ISceneAction
     {
         public int Step { get; }

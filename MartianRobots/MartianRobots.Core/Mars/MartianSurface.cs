@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-
-namespace MartianRobots.Core
+﻿namespace MartianRobots.Core
 {
+    using System;
+    using System.Collections;
+
+    /// <summary>
+    /// Marthian surface
+    /// </summary>
     public class MartianSurface
     {
         private readonly BitArray avalaibleFields;

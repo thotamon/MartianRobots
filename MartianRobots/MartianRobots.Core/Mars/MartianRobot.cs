@@ -2,6 +2,9 @@
 {
     using MartianRobots.Core.Enums;
 
+    /// <summary>
+    /// Marthian robot 
+    /// </summary>
     public class MartianRobot
     {
         public RobotOrientation Orientation { get; set; }

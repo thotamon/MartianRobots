@@ -5,6 +5,9 @@
     using System;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Action represention robot rotate operation
+    /// </summary>
     public class MartianRobotRotateAction : ISceneAction
     {
         private readonly RobotDirection _direction;
