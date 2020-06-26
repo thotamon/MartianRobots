@@ -2,6 +2,7 @@
 {
     using MartianRobots.Core.Enums;
     using MartianRobots.Core.Mars;
+    using System;
 
     public class MartianRobotMoveAction : ISceneAction
     {
@@ -14,6 +15,11 @@
 
         public bool Act(IScene scene)
         {
+            if (scene == null)
+            {
+                throw new ArgumentNullException(nameof(scene));
+            }
+
             if (scene.Robot == null || scene.Robot.IsLost)
             {
                 return false;
@@ -29,10 +35,14 @@
                     var step = this.Step;
                     while (step > 0)
                     {
-                        if (robot.X + 1 >= surface.Width && surface[robot.X, robot.Y])
+                        if (robot.X + 1 == surface.Width)
                         {
+                            if (!surface[robot.X, robot.Y])
+                            {
+                                return true;
+                            }
+
                             surface[robot.X, robot.Y] = false;
-                            robot.X += 1;
                             robot.Lose();
                             return false;
                         }
@@ -44,59 +54,71 @@
                     break;
                 }
                 case RobotOrientation.West:
+                {
+                    var step = this.Step;
+                    while (step > 0)
                     {
-                        var step = this.Step;
-                        while (step > 0)
+                        if (robot.X == 0)
                         {
-                            if (robot.X - 1 < 0 && surface[robot.X, robot.Y])
+                            if (!surface[robot.X, robot.Y])
                             {
-                                surface[robot.X, robot.Y] = false;
-                                robot.X -= 1;
-                                robot.Lose();
-                                return false;
+                                return true;
                             }
 
-                            robot.X -= 1;
-                            step--;
+                            surface[robot.X, robot.Y] = false;
+                            robot.Lose();
+                            return false;
                         }
-                        break;
+
+                        robot.X -= 1;
+                        step--;
                     }
+                    break;
+                }
                 case RobotOrientation.North:
+                {
+                    var step = this.Step;
+                    while (step > 0)
                     {
-                        var step = this.Step;
-                        while (step > 0)
+                        if (robot.Y + 1 == surface.Height)
                         {
-                            if (robot.Y + 1 >= surface.Height && surface[robot.X, robot.Y])
+                            if (!surface[robot.X, robot.Y])
                             {
-                                surface[robot.X, robot.Y + 1] = false;
-                                robot.Y += 1;
-                                robot.Lose();
-                                return false;
+                                return true;
                             }
 
-                            robot.Y += 1;
-                            step--;
+                            surface[robot.X, robot.Y] = false;
+                            robot.Lose();
+                            return false;
                         }
-                        break;
+
+                        robot.Y += 1;
+                        step--;
                     }
+                    break;
+                }
                 case RobotOrientation.South:
+                {
+                    var step = this.Step;
+                    while (step > 0)
                     {
-                        var step = this.Step;
-                        while (step > 0)
+                        if (robot.Y == 0)
                         {
-                            if (robot.Y - 1 < 0 && surface[robot.X, robot.Y])
+                            if (!surface[robot.X, robot.Y])
                             {
-                                surface[robot.X, robot.Y] = false;
-                                robot.Y -= 1;
-                                robot.Lose();
-                                return false;
+                                return true;
                             }
 
-                            robot.Y -= 1;
-                            step--;
+                            surface[robot.X, robot.Y] = false;
+                            robot.Lose();
+                            return false;
                         }
-                        break;
+
+                        robot.Y -= 1;
+                        step--;
                     }
+                    break;
+                }
             }
 
             return true;

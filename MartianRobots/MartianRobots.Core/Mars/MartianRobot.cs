@@ -27,7 +27,9 @@
 
         public override string ToString()
         {
-            return $"{this.X} {this.Y} {DescriptionHelper.GetEnumDescription(this.Orientation)}";
+            return this.IsLost
+                ? $"{this.X} {this.Y} {DescriptionHelper.GetEnumDescription(this.Orientation)} LOST"
+                : $"{this.X} {this.Y} {DescriptionHelper.GetEnumDescription(this.Orientation)}";
         }
     }
 }
