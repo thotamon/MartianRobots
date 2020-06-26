@@ -13,34 +13,27 @@ namespace MartianRobots.Tests
         public void TestMethod1()
         {
             var log = new List<string>();
-            var scene = new Scene(s => log.Add(s));
+            var inputController = new InputController(s => log.Add(s));
 
-            var line1 = MartianRobotCommandParser.Parse("5 3");
-            scene.Action(line1);
+            inputController.ProcessLine("5 3");
+            Assert.AreEqual(0, log.Count);
+
+            inputController.ProcessLine("1 1 E");
+            Assert.AreEqual(0, log.Count);
+
+            inputController.ProcessLine("RFRFRFRF");
             Assert.IsNotNull(log.Last());
 
-            var line2 = MartianRobotCommandParser.Parse("1 1 E");
-            scene.Action(line2);
+            inputController.ProcessLine("3 2 N");
             Assert.IsNotNull(log.Last());
 
-            var line3 = MartianRobotCommandParser.Parse("RFRFRFRF");
-            scene.Action(line3);
+            inputController.ProcessLine("FRRFLLFFRRFLL");
+            Assert.AreEqual("3 3 N LOST", log.Last());
+
+            inputController.ProcessLine("0 3 W");
             Assert.IsNotNull(log.Last());
 
-            var line4 = MartianRobotCommandParser.Parse("3 2 N");
-            scene.Action(line4);
-            Assert.IsNotNull(log.Last());
-
-            var line5 = MartianRobotCommandParser.Parse("FRRFLLFFRRFLL");
-            scene.Action(line5);
-            Assert.IsNotNull(log.Last());
-
-            var line6 = MartianRobotCommandParser.Parse("03 W");
-            scene.Action(line6);
-            Assert.IsNotNull(log.Last());
-
-            var line7 = MartianRobotCommandParser.Parse("LLFFFLFLFL");
-            scene.Action(line7);
+            inputController.ProcessLine("LLFFFLFLFL");
             Assert.IsNotNull(log.Last());
         }
     }

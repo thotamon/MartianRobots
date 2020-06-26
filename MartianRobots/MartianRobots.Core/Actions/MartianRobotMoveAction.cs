@@ -1,10 +1,8 @@
-﻿using MartianRobots.Core.Mars;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MartianRobots.Core.Actions
+﻿namespace MartianRobots.Core.Actions
 {
+    using MartianRobots.Core.Enums;
+    using MartianRobots.Core.Mars;
+
     public class MartianRobotMoveAction : ISceneAction
     {
         public int Step { get; }
@@ -34,12 +32,12 @@ namespace MartianRobots.Core.Actions
                         if (robot.X + 1 >= surface.Width && surface[robot.X, robot.Y])
                         {
                             surface[robot.X, robot.Y] = false;
-                            robot.X = robot.X + 1;
+                            robot.X += 1;
                             robot.Lose();
                             return false;
                         }
 
-                        robot.X = robot.X + 1;
+                        robot.X += 1;
                         step--;
                     }
 
@@ -53,12 +51,12 @@ namespace MartianRobots.Core.Actions
                             if (robot.X - 1 < 0 && surface[robot.X, robot.Y])
                             {
                                 surface[robot.X, robot.Y] = false;
-                                robot.X = robot.X - 1;
+                                robot.X -= 1;
                                 robot.Lose();
                                 return false;
                             }
 
-                            robot.X = robot.X - 1;
+                            robot.X -= 1;
                             step--;
                         }
                         break;
@@ -71,12 +69,12 @@ namespace MartianRobots.Core.Actions
                             if (robot.Y + 1 >= surface.Height && surface[robot.X, robot.Y])
                             {
                                 surface[robot.X, robot.Y + 1] = false;
-                                robot.Y = robot.Y + 1;
+                                robot.Y += 1;
                                 robot.Lose();
                                 return false;
                             }
 
-                            robot.Y = robot.Y + 1;
+                            robot.Y += 1;
                             step--;
                         }
                         break;
@@ -89,12 +87,12 @@ namespace MartianRobots.Core.Actions
                             if (robot.Y - 1 < 0 && surface[robot.X, robot.Y])
                             {
                                 surface[robot.X, robot.Y] = false;
-                                robot.Y = robot.Y - 1;
+                                robot.Y -= 1;
                                 robot.Lose();
                                 return false;
                             }
 
-                            robot.Y = robot.Y - 1;
+                            robot.Y -= 1;
                             step--;
                         }
                         break;

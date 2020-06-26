@@ -1,6 +1,7 @@
 ﻿namespace MartianRobots.Core.Actions
 {
     using MartianRobots.Core.Mars;
+    using System;
 
     public sealed class InitializeMarthianSurface : ISceneAction
     {
@@ -9,6 +10,16 @@
 
         public InitializeMarthianSurface(int width, int heigth)
         {
+            if (width <= 0 || width > 50)
+            {
+                throw new ArgumentException(nameof(width));
+            }
+
+            if (heigth <= 0 || heigth > 50)
+            {
+                throw new ArgumentException(nameof(heigth));
+            }
+
             this._width = width;
             this._height = heigth;
         }

@@ -16,9 +16,17 @@ namespace MartianRobots.Core.Mars
         private MartianSurface _surface;
         private Action<string> _output;
 
-        MartianSurface IScene.Surface { get; set; }
+        MartianSurface IScene.Surface 
+        {
+            get => this._surface;
+            set => this._surface = value;
+        }
 
-        MartianRobot IScene.Robot { get; set; }
+        MartianRobot IScene.Robot 
+        {
+            get => this._currentRobot;
+            set => this._currentRobot = value;
+        }
 
         public Scene(Action<string> output)
         {
@@ -39,12 +47,6 @@ namespace MartianRobots.Core.Mars
                     // log error
                 }
             }
-
-            if (this._currentRobot != null)
-            {
-                this._output(this._currentRobot.ToString());
-            }
-            this._currentRobot = null;
         }
     }
 }

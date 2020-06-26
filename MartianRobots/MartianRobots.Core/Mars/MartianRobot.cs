@@ -27,7 +27,7 @@
 
         public override string ToString()
         {
-            return $"{this.X} {this.Y} {this.Orientation}";
+            return $"{this.X} {this.Y} {DescriptionHelper.GetEnumDescription(this.Orientation)}";
         }
     }
 }
