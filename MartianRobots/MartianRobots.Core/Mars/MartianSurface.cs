@@ -31,7 +31,7 @@ namespace MartianRobots.Core
                 throw new ArgumentException(nameof(height));
             }
 
-            this.avalaibleFields = new BitArray(width * height);
+            this.avalaibleFields = new BitArray(width * height, true);
             this.Width = width;
             this.Height = height;
         }
